@@ -1,0 +1,12 @@
+.playerBlocksContainer {
+   display: flex;
+   position: relative;
+   margin-bottom: 20px
+}
+
+.playerBlockVersus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}

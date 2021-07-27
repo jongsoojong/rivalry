@@ -1,0 +1,49 @@
+/*================ Helper Functions ================*/
+
+@function strip-units($value) {
+    @return ($value / ($value * 0 + 1));
+  }
+  
+  @function breakpoint($value, $adjustment: 0) {
+    $adjusted-value: em($adjustment);
+  
+    @if ($adjustment == -1px) {
+      $adjusted-value: -0.01em;
+    } @else if ($adjustment == 1px) {
+      $adjusted-value: 0.01em;
+    }
+  
+    $adjusted-value: em($value) + $adjusted-value;
+  
+    @return $adjusted-value;
+  }
+
+
+@function rem($pxval) {
+    @if not unitless($pxval) {
+        $pxval: strip-units($pxval);
+    }
+
+    @return ($pxval / 16) * 1rem;
+}
+
+@function get-list-value($list, $key) {
+    $value: null;
+  
+    @each $pair in $list {
+      @if $key == nth($pair, 1) {
+        $value: nth($pair, 2);
+      }
+    }
+  
+    @return $value;
+  }
+
+@function spacing($type: base) {
+    $fetched-value: get-list-value($spacing-data, $type);
+
+    @if type-of($fetched-value) == number {
+        @return rem($fetched-value);
+    }
+}
+  
