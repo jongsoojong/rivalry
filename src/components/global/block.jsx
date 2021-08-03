@@ -4,12 +4,29 @@ import { GenericSelect as Select } from '../global/dropdown';
 import { Counter as WinCounter } from './counter';
 
 
-export const Block = ({ image,  count, incrementFunction, dropDownFunction }) => {
-
+export const Block = ({ image,  count, value, options, selectedValues, onChange, incrementFunction, setCharacters, characterValue, characterSelectedValues, characterOptions, characterOnChange }) => {    
+    console.log('dataSet', setCharacters);
+    console.log('dataValue', characterValue);
+    console.log('dataSelected', characterSelectedValues);
+    console.log('dataOptions', characterOptions);
+    console.log('dataChange', characterOnChange );
     return (
         <div className="blockContainer">
-            <p className="blockPlayerName">{ playerName }</p>
-            <Select options={renderedOptions} value={myOption} onChange={handleChange}  />
+            <div>
+            <Select 
+                options={ options } 
+                value={ value } 
+                selectedValues={selectedValues} 
+                onChange={ onChange }
+            />
+
+            {/* <Select 
+                options={ characterOptions } 
+                value={ characterValue } 
+                selectedValues={ characterSelectedValues } 
+                onChange={ characterOnChange }
+            /> */}
+            </div>
             <img src={ image } alt="" className="blockImage"/>
             <p className="blockPlayerWinCounter"> WINS: <WinCounter count={ count } /> </p>
 

@@ -1,14 +1,14 @@
-export const GGS_CHARACTERS = {
-    'SOL_BADGUY': {
+export const GGS_CHARACTERS = [
+    {
         id: 'SOL_BADGUY',
         value: 'Sol Badguy'
     },
-    'KY_KISKE': {
+    {
         id: 'KY_KISKE',
         value: 'Ky Kiske'
     }
     // KEY: VALUE
-};
+];
 
 // this wont work 
 /*
@@ -19,13 +19,13 @@ const x = Object.entries(object)
 entry = [KEY, VALUE]
 */
 
-export const SFV_CHARACTERS = {
-    'RYU': {
+export const SFV_CHARACTERS = [
+    {
         id: 'RYU',
         value: 'Ryu'
     },
-    'ZANGIEF': {
+    {
         id: 'ZANGIEF',
         value: 'Zangief'
     }
-};
+];

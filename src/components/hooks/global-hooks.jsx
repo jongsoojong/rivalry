@@ -1,11 +1,16 @@
-import { AVAILABLE_GAMES } from '../../mockdata/mock-games';
-import { GGS_CHARACTERS } from '../../mockdata/mock-characters';
 import { useState, useEffect } from 'react';
+
 
 export const GlobalHooks = () => {
     const [myCount, setMyCount] = useState(0);
     const [yourCount, setYourCount] = useState(0);
 
+    const [playerOneOption, setPlayerOne] = useState('placeholder');
+    const [playerTwoOption, setPlayerTwo] = useState('placeholder');
+
+    const [playerOneCharacterOption, setCharacterOne] = useState('placeholder');
+    const [playerTwoCharacterOption, setCharacterTwo] = useState('placeholder');
+// Consolidate this into one. The counters
     const incrementMyCounter = () => {
         setMyCount(myCount + 1);
     }
@@ -17,32 +22,30 @@ export const GlobalHooks = () => {
         setYourCount(0);  
     };
 
-    //handle Changes
-    const defaultGameOption = { id: 'placeholder', title: 'Select Your Game'};
-    const defaultCharacterOption = { id: 'placeholder', title: 'Select Your Character'};
-    const defaultPlayerOption = {id: 'placeholder', title: 'Select Your Player'};
+    const filterPlayer = (selectedPlayer) => {
 
-    const [myOption, setMyOption] = useState('placeholder');
-
-    const renderedOptions = [ defaultGameOption, ...AVAILABLE_GAMES];
-
-        
-    const handleChange = (e) => {        
-        console.log(GGS_CHARACTERS);
-        const test = Object.entries(GGS_CHARACTERS);
-        console.log('test', test);
-        setMyOption(e.target.value);
     };
 
+    const handlePlayerChange = (playerIndex) => (e) => {
+        playerIndex === 1 ? setPlayerOne(e.target.value) : setPlayerTwo(e.target.value);
+    };
 
+    const handleCharacterChange = (playerIndex) => (e) => {
+        playerIndex === 1 ? setCharacterOne(e.target.value) : setCharacterTwo(e.target.value);
+    };
+    
     return({
         myCount,
         yourCount,
-        myOption,
-        renderedOptions,
+        playerOneOption,
+        playerTwoOption,
+        playerOneCharacterOption,
+        playerTwoCharacterOption,
         clearCounter,
         incrementMyCounter,
         incrementYourCounter,
-        handleChange
+        handlePlayerChange,
+        handleCharacterChange,
+        filterPlayer,
     })
 }

@@ -1,7 +1,19 @@
 import React from 'react';
 import { FormControl, Select, MenuItem } from '@material-ui/core'
 
-export const GenericSelect = ({options, value, onChange}) => {
+export const GenericSelect = ({options, value, selectedValues, onChange}) => {
+    const disableOption = (option) => {
+        if(selectedValues && selectedValues.length) {
+            const isDisabled = selectedValues.find((entry) => {
+                if(entry === option || option === 'placeholder') {
+                    return true;
+                }
+                return false;
+            });
+            return isDisabled;    
+        }
+    };
+
     return(
         <FormControl>
             <Select
@@ -10,7 +22,16 @@ export const GenericSelect = ({options, value, onChange}) => {
             >
                 {
                     options.map((option) => {
-                        return <MenuItem disabled={option.id === 'placeholder'} key={option.id} value={option.id}> {option.title} </MenuItem>
+                        const { id, title } = option;
+                        return( 
+                            <MenuItem 
+                                disabled={ disableOption(id) } 
+                                key={id} 
+                                value={id}
+                            > 
+                                    {title} 
+                            </MenuItem>
+                        );
                     })
                 }
 
