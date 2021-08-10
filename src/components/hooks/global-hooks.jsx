@@ -5,6 +5,8 @@ export const GlobalHooks = () => {
     const [myCount, setMyCount] = useState(0);
     const [yourCount, setYourCount] = useState(0);
 
+    const [selectedGame, setSelectedGame] = useState('placeholder');
+
     const [playerOneOption, setPlayerOne] = useState('placeholder');
     const [playerTwoOption, setPlayerTwo] = useState('placeholder');
 
@@ -37,6 +39,7 @@ export const GlobalHooks = () => {
     return({
         myCount,
         yourCount,
+        selectedGame,
         playerOneOption,
         playerTwoOption,
         playerOneCharacterOption,
