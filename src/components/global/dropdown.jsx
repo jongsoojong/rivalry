@@ -2,6 +2,12 @@ import React from 'react';
 import { FormControl, Select, MenuItem } from '@material-ui/core'
 
 export const GenericSelect = ({options, value, selectedValues, onChange}) => {
+
+    /*
+        NOTES:
+        functionality should be moved to a helper
+        might also be nice to assign a boolean to see if disabling options is required (nice to have)
+    */
     const disableOption = (option) => {
         if(selectedValues && selectedValues.length) {
             const isDisabled = selectedValues.find((entry) => {

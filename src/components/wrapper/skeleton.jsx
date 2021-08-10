@@ -12,7 +12,7 @@ import { GGS_CHARACTERS } from '../../mockdata/mock-characters';
 import { SFV_CHARACTERS } from '../../mockdata/mock-characters';
 import { PLAYERS } from '../../mockdata/mock-players';
 
-
+// TO DO - REMOVE AND MIGRATE INTO global-hooks.jsx
 import { useState, useEffect } from 'react';
 
 
@@ -48,11 +48,13 @@ export const Skeleton = () => {
 
     const renderedPlayerOptions = [defaultPlayerOption, ...PLAYERS];
     
+    // SHOULD BE HANDLED IN THE HOOKS / HELPERS
     let setCharacters = '';
     
+    // SHOULD BE HANDLED IN THE HOOKS / HELPERS - SKELETON SHOULD NOT HAVE STATE - SHOULD ONLY HAVE RENDER LAYOUTS / COMPONENT ARCHITECTURE
     const [myOption, setMyOption] = useState('placeholder');
 
-
+    // SHOULD BE HANDLED IN THE HOOKS / HELPERS
     const handleChange = (e) => {        
         const test = Object.entries(AVAILABLE_GAMES);
         const selectValue = e.target.value;
@@ -62,8 +64,9 @@ export const Skeleton = () => {
         setCharacters = selectValue;
     };
 
-
+    // NO NEED TO COMBINE
     const selectedOptions = [playerOneOption, playerTwoOption];
+    // NO NEED TO COMBINE
     const selectedCharacterOptions = [ playerOneCharacterOption, playerTwoCharacterOption ]
 
 
@@ -76,6 +79,18 @@ export const Skeleton = () => {
 
             </div>
             <div className="playerBlocksContainer">
+
+                {
+                    /*
+                        NOTES:
+                        note the composition of the player blocks and how they relate to the ids of the player
+                        i.e. one block only has information about player 1 and the other only has information about player 2
+                        shared options / choices are globals so think about how that relates to a character select screen (are mirror matches possible or is it a draft pick style?)
+                        if mirror matches exist, they should pull from the same pool
+                        if draft pick, they need to be filtered just the like the players / users
+                    */
+                }
+
                 <PlayerBlock 
                     image={defaultImage}  
                     count={myCount}
