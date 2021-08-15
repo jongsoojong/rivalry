@@ -8,18 +8,16 @@ import { Button as ClearButton } from '../global/button';
 import { GenericSelect as Select } from '../global/dropdown';
 import { GlobalHooks } from '../hooks/global-hooks';
 import { AVAILABLE_GAMES } from '../../mockdata/mock-games';
-import { GGS_CHARACTERS } from '../../mockdata/mock-characters';
-import { SFV_CHARACTERS } from '../../mockdata/mock-characters';
 import { PLAYERS } from '../../mockdata/mock-players';
 
-// TO DO - REMOVE AND MIGRATE INTO global-hooks.jsx
-import { useState, useEffect } from 'react';
 
 
 export const Skeleton = () => {
     const {
         myCount,
         yourCount,
+        selectedGame,
+        gameCharacters,
         playerOneOption,
         playerTwoOption,
         playerOneCharacterOption,
@@ -29,6 +27,7 @@ export const Skeleton = () => {
         incrementYourCounter,
         handlePlayerChange,
         handleCharacterChange,
+        handleGameChange,
         filterPlayer,
     } = GlobalHooks();
 
@@ -38,45 +37,15 @@ export const Skeleton = () => {
 
     
     const renderedGameOptions = [ defaultGameOption, ...AVAILABLE_GAMES];
-    const renderedCharacterOptionsGG = [defaultCharacterOption, ...GGS_CHARACTERS];
-    const renderedCharacterOptionsSFV = [defaultCharacterOption, ...SFV_CHARACTERS];
-
-    const renderedCharacterOptionsObject =  {
-        'GUILTY_GEAR_STRIVE': renderedCharacterOptionsGG,
-        'STREET_FIGHTER_5': renderedCharacterOptionsSFV
-    }
 
     const renderedPlayerOptions = [defaultPlayerOption, ...PLAYERS];
     
-    // SHOULD BE HANDLED IN THE HOOKS / HELPERS
-    let setCharacters = '';
-    
-    // SHOULD BE HANDLED IN THE HOOKS / HELPERS - SKELETON SHOULD NOT HAVE STATE - SHOULD ONLY HAVE RENDER LAYOUTS / COMPONENT ARCHITECTURE
-    const [myOption, setMyOption] = useState('placeholder');
-
-    // SHOULD BE HANDLED IN THE HOOKS / HELPERS
-    const handleChange = (e) => {        
-        const test = Object.entries(AVAILABLE_GAMES);
-        const selectValue = e.target.value;
-        console.log('test', selectValue);
-        setMyOption(e.target.value);
-
-        setCharacters = selectValue;
-    };
-
-    // NO NEED TO COMBINE
     const selectedOptions = [playerOneOption, playerTwoOption];
-    // NO NEED TO COMBINE
-    const selectedCharacterOptions = [ playerOneCharacterOption, playerTwoCharacterOption ]
-
 
     return (
         <div className="site-container">
             <div className="selectContainer">
-                <Select options={renderedGameOptions} value={myOption} onChange={handleChange}  />
-
-                {/* <Select options={renderedPlayerOptions} value={playerOneOption} onChange={handlePlayerChangeOne}  /> */}
-
+                <Select options={renderedGameOptions} value={selectedGame} onChange={handleGameChange}  />
             </div>
             <div className="playerBlocksContainer">
 
@@ -99,10 +68,8 @@ export const Skeleton = () => {
                     options={renderedPlayerOptions}
                     onChange={handlePlayerChange(1)} 
                     incrementFunction={ incrementMyCounter } 
-                    setCharacters = { setCharacters }
                     characterValue = { playerOneCharacterOption }
-                    characterSelectedValues= { selectedCharacterOptions }
-                    characterOptions = { renderedCharacterOptionsObject }
+                    gameCharacters={ gameCharacters }
                     characterOnChange ={ handleCharacterChange(1) }
                 />
                 
@@ -116,11 +83,9 @@ export const Skeleton = () => {
                     options={renderedPlayerOptions}
                     onChange={handlePlayerChange(2)} 
                     incrementFunction={ incrementYourCounter } 
-                    setCharacters = { setCharacters }
-                    characterValue = { playerOneCharacterOption }
-                    characterSelectedValues= { selectedCharacterOptions }
-                    characterOptions = { renderedCharacterOptionsObject }
-                    characterOnChange ={ handleCharacterChange(1) }
+                    characterValue={ playerOneCharacterOption }
+                    gameCharacters={ gameCharacters }
+                    characterOnChange={ handleCharacterChange(2) }
                 />
                 
                 {/*

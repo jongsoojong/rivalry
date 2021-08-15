@@ -1,21 +1,30 @@
 import { useState, useEffect } from 'react';
 
+import { AVAILABLE_GAMES } from '../../mockdata/mock-games';
+
+import { GGS_CHARACTERS } from '../../mockdata/mock-characters';
+import { SFV_CHARACTERS } from '../../mockdata/mock-characters';
+import { SELECT_VALUES } from '../../utils/enums';
+
 
 export const GlobalHooks = () => {
     const [myCount, setMyCount] = useState(0);
     const [yourCount, setYourCount] = useState(0);
 
-    // TODO - move 'placeholder' to a const to avoid repetition for default state
-    const [selectedGame, setSelectedGame] = useState('placeholder');
+    // TODO - move 'placeholder' to a enums file to avoid repetition for default state
+    const [selectedGame, setSelectedGame] = useState(SELECT_VALUES['PLACEHOLDER']);
 
-    const [playerOneOption, setPlayerOne] = useState('placeholder');
-    const [playerTwoOption, setPlayerTwo] = useState('placeholder');
+    const [playerOneOption, setPlayerOne] = useState(SELECT_VALUES['PLACEHOLDER']);
+    const [playerTwoOption, setPlayerTwo] = useState(SELECT_VALUES['PLACEHOLDER']);
 
-    const [playerOneCharacterOption, setCharacterOne] = useState('placeholder');
-    const [playerTwoCharacterOption, setCharacterTwo] = useState('placeholder');
+    const [playerOneCharacterOption, setCharacterOne] = useState(SELECT_VALUES['PLACEHOLDER']);
+    const [playerTwoCharacterOption, setCharacterTwo] = useState(SELECT_VALUES['PLACEHOLDER']);
 
+    // TODO - move to constants file
+    const defaultCharacterOption = { id: SELECT_VALUES['PLACEHOLDER'], title: 'Select Your Character'};
 
     // TODO - Consolidate this into one counter function
+    // Look at line 68 use player index
     const incrementMyCounter = () => {
         setMyCount(myCount + 1);
     }
@@ -28,30 +37,28 @@ export const GlobalHooks = () => {
     };
 
     const findCharactersFromGame = (game) => {
-
-        /*
-            NOTES:
-            because we're treating this like we're going to change the query to some remote database, we aren't going to be able to simply filter by an id / hash value
-            therefore, a switch statement (or extended if / else if) is needed to dynamically return characters back given a specific game
-            for the game, you can reference selectedGame directly because it's within scope but I would move this function to a helper so it would need to be passed in as argument
-        */
+        const defaultCharacterOption = { id: 'placeholder', title: 'Select Your Character'};
 
         switch(game) {
-            case 'GAME 1': return(/*CHARACTERS A */);
-            break;
+            case 'GUILTY_GEAR_STRIVE': 
+                return([defaultCharacterOption, ...GGS_CHARACTERS]);
+                break;
 
-            case 'GAME 2': return(/* CHARACTERS B */);
-            break;
+            case 'STREET_FIGHTER_5': 
+                return([defaultCharacterOption, ...SFV_CHARACTERS]);
+                break;
 
-            default: return(/* NO CHARACTERS */);
+            default: 
+                return([]);
         }
     };
 
 
     const gameCharacters = findCharactersFromGame(selectedGame);
 
-    // TODO - complete filter function
-    const filterPlayer = (selectedPlayer) => {
+    const handleGameChange = (e) => {
+        const selectedValue = e.target.value;
+        setSelectedGame(selectedValue);
     };
 
     const handlePlayerChange = (playerIndex) => (e) => {
@@ -66,6 +73,7 @@ export const GlobalHooks = () => {
         myCount,
         yourCount,
         selectedGame,
+        gameCharacters,
         playerOneOption,
         playerTwoOption,
         playerOneCharacterOption,
@@ -78,6 +86,6 @@ export const GlobalHooks = () => {
         handlePlayerChange,
         // use this to handle onChange for each character select dropdown
         handleCharacterChange,
-        filterPlayer,
+        handleGameChange,
     })
 }

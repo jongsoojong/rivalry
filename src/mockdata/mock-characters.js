@@ -1,11 +1,15 @@
+// import { SOL } from '../assets/sol/profile.png';
+
 export const GGS_CHARACTERS = [
     {
         id: 'SOL_BADGUY',
-        value: 'Sol Badguy'
+        title: 'Sol Badguy',
+        img: '',
     },
     {
         id: 'KY_KISKE',
-        value: 'Ky Kiske'
+        title: 'Ky Kiske',
+        img: '',
     }
     // KEY: VALUE
 ];
@@ -22,10 +26,10 @@ entry = [KEY, VALUE]
 export const SFV_CHARACTERS = [
     {
         id: 'RYU',
-        value: 'Ryu'
+        title: 'Ryu'
     },
     {
         id: 'ZANGIEF',
-        value: 'Zangief'
+        title: 'Zangief'
     }
 ];

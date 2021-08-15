@@ -4,13 +4,34 @@ import { GenericSelect as Select } from '../global/dropdown';
 import { Counter as WinCounter } from './counter';
 
 
-export const Block = ({ image,  count, value, options, selectedValues, onChange, incrementFunction, setCharacters, characterValue, characterSelectedValues, characterOptions, characterOnChange }) => {    
-    console.log('dataSet', setCharacters);
-    console.log('dataValue', characterValue);
-    console.log('dataSelected', characterSelectedValues);
-    console.log('dataOptions', characterOptions);
-    console.log('dataChange', characterOnChange );
-    return (
+export const Block = (
+    { 
+        image, 
+        count, 
+        value, 
+        options, 
+        selectedValues, 
+        onChange, 
+        incrementFunction, 
+        setCharacters, 
+        characterValue, 
+        characterOptions, 
+        characterOnChange,
+        gameCharacters,
+    }
+    ) => {
+        
+        // const characterImage = GAME_CHARACTERS[SELECTED_CHARACTER].img;
+        /*
+            const fetchPlayerImage = async () => {
+                const imageSource = await CDN_FETCH(SELECTED_CHARACTER);
+                if(imageSource.data) {
+                    return imageSource.data;
+                }
+            }
+        */
+
+        return (
         <div className="blockContainer">
             <div>
             <Select 
@@ -31,12 +52,21 @@ export const Block = ({ image,  count, value, options, selectedValues, onChange,
                 */
             }
 
-            {/* <Select 
-                options={ characterOptions } 
-                value={ characterValue } 
-                selectedValues={ characterSelectedValues } 
-                onChange={ characterOnChange }
-            /> */}
+            { 
+            
+            <Select 
+                options={ gameCharacters } 
+                value={ 'placeholder' } 
+                selectedValues={ [] } 
+                onChange={ () => false }
+            /> 
+            
+            }
+            </div>
+            <div>
+                {
+                    // characterImage && <img src={fetchPlayerImage} />
+                }
             </div>
             <img src={ image } alt="" className="blockImage"/>
             <p className="blockPlayerWinCounter"> WINS: <WinCounter count={ count } /> </p>
