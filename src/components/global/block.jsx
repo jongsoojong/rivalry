@@ -22,6 +22,7 @@ export const Block = (
     ) => {
         
         // const characterImage = GAME_CHARACTERS[SELECTED_CHARACTER].img;
+        // console.log('selected',  gameCharacters[])
         /*
             const fetchPlayerImage = async () => {
                 const imageSource = await CDN_FETCH(SELECTED_CHARACTER);

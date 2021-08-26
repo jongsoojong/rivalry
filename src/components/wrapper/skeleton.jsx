@@ -25,6 +25,7 @@ export const Skeleton = () => {
         clearCounter,
         incrementMyCounter,
         incrementYourCounter,
+        handleWinsChange,
         handlePlayerChange,
         handleCharacterChange,
         handleGameChange,
@@ -67,7 +68,7 @@ export const Skeleton = () => {
                     selectedValues={selectedOptions}
                     options={renderedPlayerOptions}
                     onChange={handlePlayerChange(1)} 
-                    incrementFunction={ incrementMyCounter } 
+                    incrementFunction={ handleWinsChange(1) } 
                     characterValue = { playerOneCharacterOption }
                     gameCharacters={ gameCharacters }
                     characterOnChange ={ handleCharacterChange(1) }
@@ -77,12 +78,12 @@ export const Skeleton = () => {
 
                 <PlayerBlock 
                     image={defaultImage}  
-                    count={myCount}
+                    count={yourCount}
                     value={playerTwoOption}
                     selectedValues={selectedOptions}
                     options={renderedPlayerOptions}
                     onChange={handlePlayerChange(2)} 
-                    incrementFunction={ incrementYourCounter } 
+                    incrementFunction={ handleWinsChange(2) } 
                     characterValue={ playerOneCharacterOption }
                     gameCharacters={ gameCharacters }
                     characterOnChange={ handleCharacterChange(2) }

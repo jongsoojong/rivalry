@@ -68,6 +68,13 @@ export const GlobalHooks = () => {
     const handleCharacterChange = (playerIndex) => (e) => {
         playerIndex === 1 ? setCharacterOne(e.target.value) : setCharacterTwo(e.target.value);
     };
+
+    const handleWinsChange = (playerIndex) => (e) => {
+        console.log('pindex',playerIndex)
+        playerIndex === 1 ? setMyCount(myCount + 1) : setYourCount(yourCount + 1);
+        console.log('mycount', myCount);
+        console.log('yourcount', yourCount)
+    }
     
     return({
         myCount,
@@ -83,6 +90,7 @@ export const GlobalHooks = () => {
         clearCounter,
         incrementMyCounter,
         incrementYourCounter,
+        handleWinsChange,
         handlePlayerChange,
         // use this to handle onChange for each character select dropdown
         handleCharacterChange,
