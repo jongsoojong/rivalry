@@ -84,7 +84,7 @@ export const Skeleton = () => {
                     options={renderedPlayerOptions}
                     onChange={handlePlayerChange(2)} 
                     incrementFunction={ handleWinsChange(2) } 
-                    characterValue={ playerOneCharacterOption }
+                    characterValue={ playerTwoCharacterOption }
                     gameCharacters={ gameCharacters }
                     characterOnChange={ handleCharacterChange(2) }
                 />

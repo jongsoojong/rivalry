@@ -2,7 +2,7 @@ import React from 'react';
 import { Button as CounterButton } from './button';
 import { GenericSelect as Select } from '../global/dropdown';
 import { Counter as WinCounter } from './counter';
-
+import defaultImage from '../../assets/snorlax.png';
 
 export const Block = (
     { 
@@ -22,7 +22,15 @@ export const Block = (
     ) => {
         
         // const characterImage = GAME_CHARACTERS[SELECTED_CHARACTER].img;
-        // console.log('selected',  gameCharacters[])
+        console.log('selected',  gameCharacters )
+
+        const selectedCharacter = gameCharacters.find((character) => {
+            if(characterValue === character.id) return character;
+            return false;
+        });
+        const { img: characterImage } = selectedCharacter || {};
+        // const characterImage = selectedCharacter?.img;
+
         /*
             const fetchPlayerImage = async () => {
                 const imageSource = await CDN_FETCH(SELECTED_CHARACTER);
@@ -57,9 +65,9 @@ export const Block = (
             
             <Select 
                 options={ gameCharacters } 
-                value={ 'placeholder' } 
-                selectedValues={ [] } 
-                onChange={ () => false }
+                value={ characterValue } 
+                selectedValues={ [characterValue] } 
+                onChange={ characterOnChange }
             /> 
             
             }
@@ -69,7 +77,16 @@ export const Block = (
                     // characterImage && <img src={fetchPlayerImage} />
                 }
             </div>
-            <img src={ image } alt="" className="blockImage"/>
+
+            {
+                /*
+                characterImage
+                ? <img src={characterImage} alt="specific character" />
+                : <img src={defaultImage} alt="fallback image" />
+                */
+            }
+            
+            <img src={ characterImage ? characterImage : defaultImage } alt="" className="blockImage"/>
             <p className="blockPlayerWinCounter"> WINS: <WinCounter count={ count } /> </p>
 
             <CounterButton text="WON A MATCH" onClick={incrementFunction}/>

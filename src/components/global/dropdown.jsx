@@ -1,6 +1,11 @@
 import React from 'react';
 import { FormControl, Select, MenuItem } from '@material-ui/core'
 
+// options = [object]
+// value = string
+// selectedValues = [string]
+// onChange = () => {}
+
 export const GenericSelect = ({options, value, selectedValues, onChange}) => {
 
     /*
