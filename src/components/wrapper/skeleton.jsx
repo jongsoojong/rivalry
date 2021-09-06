@@ -10,7 +10,8 @@ import { GlobalHooks } from '../hooks/global-hooks';
 import { AVAILABLE_GAMES } from '../../mockdata/mock-games';
 import { PLAYERS } from '../../mockdata/mock-players';
 
-
+// TODO HOMEWORK - ADD BUTTON TO USE NEW MATCH HISTORY FUNCTION TO SAVE MATCH TO LOCAL STATE
+// EXTRA CREDIT - ADD VALIDATION CHECKS TO BUTTON RENDER UI TO ENSURE ALL DATA IS CAPTURED PROPERLY 
 
 export const Skeleton = () => {
     const {

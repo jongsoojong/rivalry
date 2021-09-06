@@ -8,6 +8,10 @@ import { SELECT_VALUES } from '../../utils/enums';
 
 
 export const GlobalHooks = () => {
+    const [matchHistory, setMatchHistory] = useState({});
+
+    const [matchCount, setMatchCount] = useState(0);
+
     const [myCount, setMyCount] = useState(0);
     const [yourCount, setYourCount] = useState(0);
 
@@ -16,6 +20,8 @@ export const GlobalHooks = () => {
 
     const [playerOneOption, setPlayerOne] = useState(SELECT_VALUES['PLACEHOLDER']);
     const [playerTwoOption, setPlayerTwo] = useState(SELECT_VALUES['PLACEHOLDER']);
+
+    const [winner, setWinner] = useState("");
 
     const [playerOneCharacterOption, setCharacterOne] = useState(SELECT_VALUES['PLACEHOLDER']);
     const [playerTwoCharacterOption, setCharacterTwo] = useState(SELECT_VALUES['PLACEHOLDER']);
@@ -28,9 +34,11 @@ export const GlobalHooks = () => {
     const incrementMyCounter = () => {
         setMyCount(myCount + 1);
     }
+
     const incrementYourCounter = () => {
         setYourCount(yourCount + 1);
     }
+
     const clearCounter = () => {
         setMyCount(0);
         setYourCount(0);
@@ -52,7 +60,6 @@ export const GlobalHooks = () => {
                 return ([]);
         }
     };
-
 
     const gameCharacters = findCharactersFromGame(selectedGame);
 
@@ -76,7 +83,47 @@ export const GlobalHooks = () => {
         console.log('yourcount', yourCount)
     }
 
+    const addMatchHistory = () => {
+
+        // TODO - create hash
+        // const matchId = generateHash();
+
+        if(
+            playerOneOption === 'PLACEHOLDER' || 
+            !playerTwoOption || 
+            !playerOneCharacterOption || 
+            !playerTwoCharacterOption || 
+            !selectedGame || 
+            !winner) {
+            return;
+        }
+
+        const newMatch = {
+            player1: playerOneOption,
+            player2: playerTwoOption,
+            character1: playerOneCharacterOption,
+            character2: playerTwoCharacterOption,
+            winner: winner,
+            gameNumber: matchCount,
+            game: selectedGame,
+        };
+
+        const newHistory = {
+            ...matchHistory,
+            // TODO - subsitute matchCount for matchId when hashing in implimented
+            [matchCount]: newMatch,
+        };
+
+        setMatchHistory(newHistory);
+        setWinner("");
+        setMatchCount(matchCount+1);
+    };
+
+    // const updateMatchHistory = () => {};
+
+
     return ({
+        matchHistory,
         myCount,
         yourCount,
         selectedGame,
@@ -95,5 +142,6 @@ export const GlobalHooks = () => {
         // use this to handle onChange for each character select dropdown
         handleCharacterChange,
         handleGameChange,
+        addMatchHistory,
     })
 }
