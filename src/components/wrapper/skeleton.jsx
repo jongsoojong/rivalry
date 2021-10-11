@@ -43,6 +43,11 @@ export const Skeleton = () => {
     
     const selectedOptions = [playerOneOption, playerTwoOption];
 
+    /*
+        TODO - EXTRA CREDIT 
+        - add mapping function based on game to determine amount of players / characters per player
+    */
+
     return (
         <div className="site-container">
             <div className="selectContainer">

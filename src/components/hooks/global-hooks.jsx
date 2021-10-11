@@ -8,6 +8,10 @@ import { SELECT_VALUES } from '../../utils/enums';
 
 
 export const GlobalHooks = () => {
+
+    // MAIN MATCH HISTORY STATE
+    const [matchHistory, setMatchHistory] = useState({});
+
     const [myCount, setMyCount] = useState(0);
     const [yourCount, setYourCount] = useState(0);
 
@@ -28,6 +32,7 @@ export const GlobalHooks = () => {
     const incrementMyCounter = () => {
         setMyCount(myCount + 1);
     }
+
     const incrementYourCounter = () => {
         setYourCount(yourCount + 1);
     }
@@ -53,7 +58,6 @@ export const GlobalHooks = () => {
         }
     };
 
-
     const gameCharacters = findCharactersFromGame(selectedGame);
 
     const handleGameChange = (e) => {
@@ -76,6 +80,58 @@ export const GlobalHooks = () => {
         console.log('yourcount', yourCount)
     }
 
+    const updateMatchHistory = () => {
+        /*
+        TODO 
+        - create functional logic to store match history details into local state
+        - sync local state with remote DB (extra credit project)
+        - ?GRAPHQL layer?
+
+        const gameId = generateRandomId();
+
+        const exampleID = 2021-11-3-11:45:113456-XX-XX-XXXXXXXXXX;
+
+        const gameInfo = {
+            players: {
+                PLAYER_ID_1: {
+                    characterSelected: CHARACTER_ID_X,
+                    color: 3,
+                    etc...
+                },
+                PLAYER_ID_2: {},
+                PLAYER_ID_N: {},
+            },
+            meta: {
+                matchDate: 2021-11-16-11:45:113456,
+                numRounds: NUMBER,
+                matchWinnerID: PLAYER_X_ID,
+                players: [ID_1, ID_2, ID_N],
+                matchOutcomes: [
+                    {
+                        roundNumber: 1,
+                        matchTime: MATCH_TIME,
+                        matchOutcome: WINNING_PLAYER_ID,
+                    },
+                    {
+                        roundNumber: 2,
+                        matchTime: MATCH_TIME,
+                        matchOutcome: WINNING_PLAYER_ID,
+                    },
+                ],
+
+            },
+        };
+
+        const updatedMatchHistory = matchHistory;
+
+        updatedMatchHistory[gameId] = gameInfo;
+
+        setMatchHistory(updatedMatchHistory);
+
+        */
+
+    };
+
     return ({
         myCount,
         yourCount,
@@ -95,5 +151,5 @@ export const GlobalHooks = () => {
         // use this to handle onChange for each character select dropdown
         handleCharacterChange,
         handleGameChange,
-    })
+    });
 }
